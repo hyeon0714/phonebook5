@@ -1,6 +1,8 @@
 package com.javaex.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class PhonebookService {
 	//메소드 gs
 	//메소디 일반
 	
-	//수정폼
+	//수정
 	public int exeModify(PersonVo personVo) {
 		System.out.println("PhonebookService.exeModify()");
 		
@@ -28,6 +30,8 @@ public class PhonebookService {
 		return count;
 		
 	}
+	
+
 	
 	
 	//리스트
@@ -41,7 +45,7 @@ public class PhonebookService {
 	}
 	
 	//등록
-	public int exeWrite(PersonVo personVo) {
+	public int exeWrite2(PersonVo personVo) {
 		System.out.println("PhonebookService.exeWrite()");
 		
 		//비지니스로직X
@@ -49,6 +53,23 @@ public class PhonebookService {
 		int count = phonebookDao.personInsert(personVo);
 		
 		return count;
+	}
+	
+	//등록2
+	public int exeWrite(String name, String hp, String company) {
+		System.out.println(name);
+		System.out.println(hp);
+		System.out.println(company);
+		
+		Map<String, String> personMap = new HashMap<String, String>();
+		
+		personMap.put("name", name);
+		personMap.put("hp", hp);
+		personMap.put("company", company);
+		
+		phonebookDao.personInsert2(personMap);
+		
+		return 0;
 	}
 	
 	
@@ -67,6 +88,17 @@ public class PhonebookService {
 		return personVo;
 		
 	}
+	
+	//수정폼2
+	public Map<String, Object> exeModifyForm2(int no) {
+		System.out.println("PhonebookService.exeModifyForm2()");
+		
+		Map<String, Object> pMap = phonebookDao.personSelectOne2(no);
+		
+		return pMap;
+		
+	}
+	
 	
 	
 	//삭제 

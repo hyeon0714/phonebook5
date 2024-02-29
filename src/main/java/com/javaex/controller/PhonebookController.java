@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,21 @@ public class PhonebookController {
 		
 		return "modifyForm";
 	}
+	
+	// 수정폼2
+	@RequestMapping(value="/phone/modifyform2", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm2(@RequestParam(value = "no") int no, Model model) {
+		System.out.println("PhonebookController.modifyForm2()");
+		
+		System.out.println(no);
+		
+		Map<String, Object> pMap = phonebookService.exeModifyForm2(no);
+		System.out.println(pMap);
+		
+		model.addAttribute("pMap", pMap);
+		
+		return "modifyForm2";
+	}
 
 	
 	
@@ -51,7 +67,7 @@ public class PhonebookController {
 		//서비스를 메모리에 올리고
 		//서비스의 메소드 사용
 		//PhonebookService phonebookService = new PhonebookService();
-		phonebookService.exeWrite(personVo);
+		phonebookService.exeWrite2(personVo);
 		
 		//리스트로 리다이렉트
 		return "redirect:/phone/list";
@@ -90,8 +106,6 @@ public class PhonebookController {
 		return "redirect:/phone/list";
 	}
 	
-	
-	
 
 	//삭제
 	@RequestMapping(value="/phone/delete", method = {RequestMethod.GET, RequestMethod.POST})
@@ -120,14 +134,7 @@ public class PhonebookController {
 		System.out.println(hp);
 		System.out.println(company);
 		
-		//vo 묶는다
-		PersonVo personVo = new PersonVo(name, hp, company);
-		
-		//서비스를 메모리에 올리고
-		//서비스의 메소드 사용
-		//PhonebookService phonebookService = new PhonebookService();
-		phonebookService.exeWrite(personVo);
-				
+		phonebookService.exeWrite(name, hp, company);
 		
 		//리스트로 리다이렉트
 		return "redirect:/phone/list";
