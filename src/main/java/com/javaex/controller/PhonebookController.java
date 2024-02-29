@@ -44,7 +44,6 @@ public class PhonebookController {
 	public String modifyForm2(@RequestParam(value = "no") int no, Model model) {
 		System.out.println("PhonebookController.modifyForm2()");
 		
-		System.out.println(no);
 		
 		Map<String, Object> pMap = phonebookService.exeModifyForm2(no);
 		System.out.println(pMap);
